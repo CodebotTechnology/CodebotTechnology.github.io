@@ -216,39 +216,46 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero-apps p { font-size: 14.5px; color: var(--muted); line-height: 1.45; }
 .hero-apps strong { color: var(--text); display: block; font-size: 15px; }
 
-.hero-visual { position: relative; height: clamp(520px, 52vw, 640px); }
+.hero-visual { position: relative; height: clamp(560px, 50vw, 640px); }
 .phone { position: absolute; width: clamp(220px, 21vw, 280px); aspect-ratio: 9 / 19.5; border-radius: 44px; padding: 10px; background: var(--phone-frame); box-shadow: var(--shadow-lg), inset 0 0 0 1.5px rgba(255,255,255,.08); }
 .phone::before { content: ""; position: absolute; top: 18px; left: 50%; width: 76px; height: 20px; transform: translateX(-50%); background: var(--phone-frame); border-radius: 20px; z-index: 2; }
 .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 34px; background: #fff; }
-.hero-visual .phone-a { left: 6%; top: 40px; transform: rotate(-6deg); z-index: 1; }
-.hero-visual .phone-b { right: 6%; top: 0; transform: rotate(5deg); z-index: 2; }
-.float-card { position: absolute; z-index: 3; display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: 14px; line-height: 1.3; animation: float 6s ease-in-out infinite; }
+/* Hero: three phones side by side, only lightly overlapping, so every screen stays visible */
+.hero-visual .phone { width: 35%; top: 50%; border-radius: 36px; padding: 8px; }
+.hero-visual .phone img { border-radius: 28px; }
+.hero-visual .phone::before { top: 14px; width: 56px; height: 15px; }
+.hero-visual .phone-a { left: 0; transform: translateY(-45%) rotate(-5deg); z-index: 1; }
+.hero-visual .phone-b { right: 0; transform: translateY(-45%) rotate(5deg); z-index: 1; }
+.hero-visual .phone-c { width: 38%; left: 50%; transform: translate(-50%, -52%); z-index: 2; }
+.float-card { position: absolute; z-index: 3; display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: 14px; line-height: 1.3; white-space: nowrap; animation: float 6s ease-in-out infinite; }
 .float-card img { width: 44px; height: 44px; border-radius: 12px; }
 .float-card strong { display: block; font-size: 15px; }
 .float-card span { color: var(--muted); font-size: 13px; }
-.float-card.fc-1 { left: -2%; bottom: 70px; }
-.float-card.fc-2 { right: -4%; bottom: 150px; animation-delay: -3s; }
-.float-card.fc-3 { left: 30%; top: -8px; animation-delay: -1.5s; }
+/* Cards sit above and below the phones, never over a screen */
+.float-card.fc-4 { left: 0; top: 0; }
+.float-card.fc-3 { right: 0; top: 14px; animation-delay: -1.5s; }
+.float-card.fc-1 { left: 0; bottom: 14px; animation-delay: -3s; }
+.float-card.fc-2 { right: 0; bottom: 0; animation-delay: -4.5s; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { height: 560px; max-width: 560px; width: 100%; margin: 0 auto; }
+  .hero-visual { height: 640px; max-width: 560px; width: 100%; margin: 40px auto 0; }
 }
 @media (max-width: 560px) {
   .hero-visual { height: 470px; }
-  .phone { width: 200px; border-radius: 36px; padding: 8px; }
-  .phone img { border-radius: 28px; }
-  .phone::before { top: 14px; width: 60px; height: 16px; }
-  .hero-visual .phone-a { left: 0; }
-  .hero-visual .phone-b { right: 0; }
-  .float-card { padding: 9px 12px 9px 9px; font-size: 12.5px; }
-  .float-card img { width: 36px; height: 36px; border-radius: 10px; }
+  .hero-visual .phone { width: 38%; border-radius: 24px; padding: 5px; }
+  .hero-visual .phone-c { width: 42%; }
+  .hero-visual .phone img { border-radius: 19px; }
+  .hero-visual .phone::before { top: 9px; width: 36px; height: 10px; }
+  .float-card { padding: 8px 12px 8px 8px; gap: 10px; font-size: 12.5px; }
+  .float-card img { width: 34px; height: 34px; border-radius: 10px; }
   .float-card strong { font-size: 13.5px; }
-  .float-card span { font-size: 12px; }
-  .float-card.fc-1 { left: 0; bottom: 30px; }
-  .float-card.fc-2 { right: 0; bottom: 120px; }
-  .float-card.fc-3 { display: none; }
+  .float-card span { display: none; }
+  .float-card.fc-4 { left: 0; top: 0; }
+  .float-card.fc-3 { right: 0; top: 10px; }
+  .float-card.fc-1 { left: 0; bottom: 10px; }
+  .float-card.fc-2 { right: 0; bottom: 0; }
 }
 
 /* ---------- Stats ---------- */
@@ -295,15 +302,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 .accent-sumblitz { --accent: #f08a00; --accent-soft: rgba(240, 138, 0, .13); }
 .accent-lovewall { --accent: #e9487a; --accent-soft: rgba(233, 72, 122, .12); }
 .accent-snap { --accent: #1683f5; --accent-soft: rgba(22, 131, 245, .12); }
+.accent-coachzy { --accent: #e8501f; --accent-soft: rgba(232, 80, 31, .12); }
 :root[data-theme="dark"] .accent-linguasay { --accent: #a98bff; }
 :root[data-theme="dark"] .accent-sumblitz { --accent: #ffb547; }
 :root[data-theme="dark"] .accent-lovewall { --accent: #ff7aa2; }
 :root[data-theme="dark"] .accent-snap { --accent: #5fb0ff; }
+:root[data-theme="dark"] .accent-coachzy { --accent: #ff8a5c; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .accent-linguasay { --accent: #a98bff; }
   :root:not([data-theme="light"]) .accent-sumblitz { --accent: #ffb547; }
   :root:not([data-theme="light"]) .accent-lovewall { --accent: #ff7aa2; }
   :root:not([data-theme="light"]) .accent-snap { --accent: #5fb0ff; }
+  :root:not([data-theme="light"]) .accent-coachzy { --accent: #ff8a5c; }
 }
 
 @media (max-width: 900px) {
@@ -450,7 +460,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 960px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 620px) { .feature-grid { grid-template-columns: 1fr; } }
 
-.more-apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.more-apps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .mini-app { display: flex; align-items: center; gap: 16px; padding: 22px; border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--border); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
 .mini-app:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--border-strong); }
 .mini-app img { width: 60px; height: 60px; border-radius: 16px; flex: none; }
